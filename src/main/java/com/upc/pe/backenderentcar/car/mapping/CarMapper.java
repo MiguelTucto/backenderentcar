@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CarMapper implements Serializable {
     @Autowired
-    EnhancedModelMapper mapper;
+    private EnhancedModelMapper mapper;
 
     public CarResource toResource(Car model) { return mapper.map(model, CarResource.class); }
 

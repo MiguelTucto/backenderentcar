@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 @Tag(name = "Car")
 @RestController
 @CrossOrigin
-@RequestMapping("api/v1/cars")
+@RequestMapping("/api/v1/cars")
 public class CarsController {
     private final CarService carService;
     private final CarMapper mapper;

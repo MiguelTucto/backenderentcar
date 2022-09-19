@@ -1,5 +1,12 @@
 package com.upc.pe.backenderentcar.car.resource;
 
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@With
 public class CarResource {
     private Long id;
     private String address;

@@ -47,6 +47,10 @@ public class CarServiceImpl implements CarService {
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
+        Car carWithAddress = carRepository.findByAddress(car.getAddress());
+        if (carWithAddress != null)
+            throw new ResourceValidationException(ENTITY, "An Car with the same address already exists");
+
         return carRepository.save(car);
     }
 
@@ -55,6 +59,10 @@ public class CarServiceImpl implements CarService {
         Set<ConstraintViolation<Car>> violations = validator.validate(request);
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
+
+        Car carWithAddress = carRepository.findByAddress(request.getAddress());
+        if (carWithAddress != null)
+            throw new ResourceValidationException(ENTITY, "An Car with the same address already exists");
 
         return carRepository.findById(carId).map(car ->
                 carRepository.save(car

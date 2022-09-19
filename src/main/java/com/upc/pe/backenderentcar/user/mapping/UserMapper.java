@@ -15,7 +15,7 @@ import java.util.List;
 
 public class UserMapper implements Serializable {
     @Autowired
-    EnhancedModelMapper mapper;
+    private EnhancedModelMapper mapper;
 
     public UserResource toResource(User model) { return mapper.map(model, UserResource.class); }
 
