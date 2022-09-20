@@ -3,6 +3,7 @@ package com.upc.pe.backenderentcar.user.mapping;
 import com.upc.pe.backenderentcar.shared.mapping.EnhancedModelMapper;
 import com.upc.pe.backenderentcar.user.domain.model.entity.User;
 import com.upc.pe.backenderentcar.user.resource.CreateUserResource;
+import com.upc.pe.backenderentcar.user.resource.LoginUserResource;
 import com.upc.pe.backenderentcar.user.resource.UpdateUserResource;
 import com.upc.pe.backenderentcar.user.resource.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +26,5 @@ public class UserMapper implements Serializable {
 
     public User toModel(CreateUserResource resource) { return mapper.map(resource, User.class); }
     public User toModel(UpdateUserResource resource) { return mapper.map(resource, User.class); }
+    public User toModel(LoginUserResource resource) { return mapper.map(resource, User.class); }
 }

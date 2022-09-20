@@ -79,6 +79,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User login(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
+
+    @Override
     public ResponseEntity<?> delete(Long userId) {
         return userRepository.findById(userId).map(user -> {
                     userRepository.delete(user);

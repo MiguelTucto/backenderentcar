@@ -13,5 +13,7 @@ public interface UserService {
     User getById(Long userId);
     User create(User user);
     User update(Long userId, User request);
+
+    User login(String email, String password);
     ResponseEntity<?> delete(Long userId);
 }

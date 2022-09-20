@@ -3,6 +3,7 @@ package com.upc.pe.backenderentcar.user.api;
 import com.upc.pe.backenderentcar.user.domain.service.UserService;
 import com.upc.pe.backenderentcar.user.mapping.UserMapper;
 import com.upc.pe.backenderentcar.user.resource.CreateUserResource;
+import com.upc.pe.backenderentcar.user.resource.LoginUserResource;
 import com.upc.pe.backenderentcar.user.resource.UpdateUserResource;
 import com.upc.pe.backenderentcar.user.resource.UserResource;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -46,4 +47,9 @@ public class UsersController {
 
     @DeleteMapping("{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId) { return userService.delete(userId); }
+
+    @PostMapping("/login")
+    public UserResource login(@RequestBody LoginUserResource resource) {
+        return mapper.toResource(userService.login(resource.getEmail(), resource.getPassword()));
+    }
 }
