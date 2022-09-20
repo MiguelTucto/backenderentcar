@@ -35,9 +35,14 @@ public class CarsController {
         return mapper.toResource(carService.getById(carId));
     }
 
-    @PostMapping
-    public CarResource createCar (@RequestBody CreateCarResource resource) {
-        return mapper.toResource(carService.create(mapper.toModel(resource)));
+    @GetMapping("user/{userId}")
+    public Page<CarResource> getAllCarsByUserId (@PathVariable Long userId, Pageable pageable) {
+        return carService.getAllCarsByUserId(userId, pageable).map(mapper::toResource);
+    }
+
+    @PostMapping("user/{userId}/")
+    public CarResource createCar (@RequestBody CreateCarResource resource, @PathVariable Long userId) {
+        return mapper.toResource(carService.create(mapper.toModel(resource), userId));
     }
 
     @PutMapping("{carId}")

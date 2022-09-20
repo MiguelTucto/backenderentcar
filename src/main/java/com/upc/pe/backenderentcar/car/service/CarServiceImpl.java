@@ -5,6 +5,8 @@ import com.upc.pe.backenderentcar.car.domain.persistence.CarRepository;
 import com.upc.pe.backenderentcar.car.domain.service.CarService;
 import com.upc.pe.backenderentcar.shared.exception.ResourceNotFoundException;
 import com.upc.pe.backenderentcar.shared.exception.ResourceValidationException;
+import com.upc.pe.backenderentcar.user.domain.model.entity.User;
+import com.upc.pe.backenderentcar.user.domain.persistence.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,12 @@ import java.util.Set;
 public class CarServiceImpl implements CarService {
     private static final String ENTITY = "Car";
     private final CarRepository carRepository;
+    private final UserRepository userRepository;
     private final Validator validator;
 
-    public CarServiceImpl(CarRepository carRepository, Validator validator) {
+    public CarServiceImpl(CarRepository carRepository, UserRepository userRepository, Validator validator) {
         this.carRepository = carRepository;
+        this.userRepository = userRepository;
         this.validator = validator;
     }
 
@@ -37,19 +41,24 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public Page<Car> getAllCarsByUserId(Long userId, Pageable pageable) {
+        return carRepository.findCarByUserId(userId, pageable);
+    }
+
+    @Override
     public Car getById(Long carId) {
         return carRepository.findById(carId).orElseThrow(() -> new ResourceNotFoundException(ENTITY, carId));
     }
 
     @Override
-    public Car create(Car car) {
+    public Car create(Car car, Long userId) {
         Set<ConstraintViolation<Car>> violations = validator.validate(car);
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
-        Car carWithAddress = carRepository.findByAddress(car.getAddress());
-        if (carWithAddress != null)
-            throw new ResourceValidationException(ENTITY, "An Car with the same address already exists");
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", userId));
+        car.setUser(user);
 
         return carRepository.save(car);
     }

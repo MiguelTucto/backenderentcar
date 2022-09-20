@@ -1,5 +1,7 @@
 package com.upc.pe.backenderentcar.car.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.upc.pe.backenderentcar.user.domain.model.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -67,4 +69,8 @@ public class Car implements Serializable {
     @NotNull
     @NotBlank
     private String mechanicConditions;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
 }

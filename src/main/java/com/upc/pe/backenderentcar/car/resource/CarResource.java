@@ -1,5 +1,6 @@
 package com.upc.pe.backenderentcar.car.resource;
 
+import com.upc.pe.backenderentcar.user.resource.UserResource;
 import lombok.*;
 
 @Getter
@@ -23,4 +24,5 @@ public class CarResource {
     private String imagePath;
     private String category;
     private String mechanicConditions;
+    private Long userId;
 }
