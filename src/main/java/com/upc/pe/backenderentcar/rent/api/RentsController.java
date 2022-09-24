@@ -29,7 +29,7 @@ public class RentsController {
         return mapper.modelListToPage(rentService.getAll(), pageable);
     }
 
-    @GetMapping
+    @GetMapping({"rentId"})
     public RentResource getRentById(@PathVariable Long rentId) {
         return mapper.toResource(rentService.getById(rentId));
     }
