@@ -8,6 +8,6 @@ Feature: User Adding
 
   @user-adding
   Scenario: Add User
-    When A User Request is sent with values "Angel", "Rivera", "miguelito", "miguelito", "photo", 999
+    When A User Request is sent with values "Angel", "Rivera", "Arrendador", "miguelito", "miguelito", "photo", 999
     Then A Response with Status 200 is received for the user
-    And A User Resource is sent with values "Angel", "Rivera", "miguelito", "miguelito", "photo", 999
+    And A User Resource is sent with values "Angel", "Rivera", "Arrendador", "miguelito", "miguelito", "photo", 999

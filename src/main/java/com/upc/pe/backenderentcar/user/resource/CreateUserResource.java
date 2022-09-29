@@ -27,19 +27,24 @@ public class CreateUserResource {
 
     @NotNull
     @NotBlank
-    @Size(max = 10)
+    @Size(max = 50)
+    private String typeOfUser;
+
+    @NotNull
+    @NotBlank
+    @Size(max = 50)
     @Column(unique = true)
     private String email;
 
     @NotNull
     @NotBlank
-    @Size(max = 10)
+    @Size(max = 50)
     @Column(unique = true)
     private String password;
 
     @NotNull
     @NotBlank
-    @Size(max = 10)
+    @Size(max = 200)
     @Column(unique = true)
     private String imageUrl;
 
