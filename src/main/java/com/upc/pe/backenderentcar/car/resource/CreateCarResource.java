@@ -16,13 +16,11 @@ public class CreateCarResource {
     @NotNull
     @NotBlank
     @Size(max = 10)
-    @Column(unique = true)
     private String address;
 
     @NotNull
     @NotBlank
     @Size(max = 10)
-    @Column(unique = true)
     private String brand;
 
     private int year;
@@ -30,21 +28,19 @@ public class CreateCarResource {
     @NotNull
     @NotBlank
     @Size(max = 10)
-    @Column(unique = true)
     private String model;
 
     private int mileage;
 
     private int seating;
 
-    private boolean manual;
+    private String manual;
 
     private int carValueInDollars;
 
     @NotNull
     @NotBlank
     @Size(max = 100)
-    @Column(unique = true)
     private String extraInformation;
 
     private int rate;
@@ -54,18 +50,15 @@ public class CreateCarResource {
     @NotNull
     @NotBlank
     @Size(max = 200)
-    @Column(unique = true)
     private String imagePath;
 
     @NotNull
     @NotBlank
     @Size(max = 20)
-    @Column(unique = true)
     private String category;
 
     @NotNull
     @NotBlank
     @Size(max = 10)
-    @Column(unique = true)
     private String mechanicConditions;
 }

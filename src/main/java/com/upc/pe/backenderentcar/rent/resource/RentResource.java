@@ -12,7 +12,7 @@ public class RentResource {
     private String startDate;
     private String finishDate;
     private int amount;
-    private double rate;
+    private int rate;
     private Long userId;
     private Long carId;
 }

@@ -24,5 +24,5 @@ public class UpdateRentResource {
     private int amount;
 
     @NotNull
-    private double rate;
+    private int rate;
 }

@@ -35,13 +35,13 @@ public class User implements Serializable {
 
     @NotNull
     @NotBlank
-    @Size(max = 10)
+    @Size(max = 50)
     @Column(unique = true)
     private String email;
 
     @NotNull
     @NotBlank
-    @Size(max = 10)
+    @Size(max = 50)
     @Column(unique = true)
     private String password;
 

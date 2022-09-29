@@ -5,12 +5,19 @@ import com.upc.pe.backenderentcar.car.mapping.CarMapper;
 import com.upc.pe.backenderentcar.car.resource.CarResource;
 import com.upc.pe.backenderentcar.car.resource.CreateCarResource;
 import com.upc.pe.backenderentcar.car.resource.UpdateCarResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Pageable;
+
+import javax.validation.Valid;
 
 @Tag(name = "Car")
 @RestController
@@ -40,13 +47,21 @@ public class CarsController {
         return carService.getAllCarsByUserId(userId, pageable).map(mapper::toResource);
     }
 
+    @Operation(summary = "Create Car", description = "Create Car", tags = {"Cars"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Car created",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = CarResource.class)
+                    ))
+    })
     @PostMapping("user/{userId}/")
-    public CarResource createCar (@RequestBody CreateCarResource resource, @PathVariable Long userId) {
+    public CarResource createCar (@Valid @RequestBody CreateCarResource resource, @Valid @PathVariable Long userId) {
         return mapper.toResource(carService.create(mapper.toModel(resource), userId));
     }
 
     @PutMapping("{carId}")
-    public CarResource updateCar(@PathVariable Long carId, @RequestBody UpdateCarResource resource) {
+    public CarResource updateCar(@PathVariable Long carId, @Valid @RequestBody UpdateCarResource resource) {
         return mapper.toResource(carService.update(carId, mapper.toModel(resource)));
     }
 

@@ -77,7 +77,7 @@ public class CarServiceImpl implements CarService {
                 carRepository.save(car
                         .withAddress(request.getAddress())
                         .withCarValueInDollars(request.getCarValueInDollars()))
-                        .withManual(request.isManual())
+                        .withManual(request.getManual())
                         .withBrand(request.getBrand())
                         .withYear(request.getYear())
                         .withModel(request.getModel())

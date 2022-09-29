@@ -37,7 +37,7 @@ public class Rent implements Serializable {
     private int amount;
 
     @NotNull
-    private double rate;
+    private int rate;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
