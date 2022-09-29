@@ -55,6 +55,18 @@ public class RentsController {
     public RentResource getRentById(@PathVariable Long rentId) {
         return mapper.toResource(rentService.getById(rentId));
     }
+    @Operation(summary = "Get All Rents by User", description = "You can get all rents with an user id", tags = {"Rents"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "You can get all rents with an user id",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = CarResource.class)
+                    ))
+    })
+    @GetMapping("user/{userId}")
+    public Page<RentResource> getAllRentsByUserId(@PathVariable Long userId, Pageable pageable) {
+        return rentService.getAllRentsByUserId(userId, pageable).map(mapper::toResource);
+    }
 
     @Operation(summary = "Create Rent by User and Car", description = "You can create a rent by car and user id", tags = {"Rents"})
     @ApiResponses(value = {
