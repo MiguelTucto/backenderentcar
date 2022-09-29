@@ -10,9 +10,9 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginUserResource {
-    @Size(max = 50)
+    @Size(max = 20)
     private String email;
 
-    @Size(max = 50)
+    @Size(max = 10)
     private String password;
 }

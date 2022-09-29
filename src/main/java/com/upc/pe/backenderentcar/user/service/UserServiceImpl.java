@@ -48,11 +48,6 @@ public class UserServiceImpl implements UserService {
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
-        User userWithName = userRepository.findByName(user.getName());
-
-        if (userWithName != null)
-            throw new ResourceValidationException(ENTITY, "An client with the same name already exists");
-
         return userRepository.save(user);
     }
 
@@ -64,8 +59,6 @@ public class UserServiceImpl implements UserService {
 
         User userWithName = userRepository.findByName(request.getName());
 
-        if (userWithName != null)
-            throw new ResourceValidationException(ENTITY, "An client with the same name already exists");
 
         return userRepository.findById(userId).map(user ->
                 userRepository.save(user

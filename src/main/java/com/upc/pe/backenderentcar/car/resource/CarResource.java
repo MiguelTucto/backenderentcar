@@ -16,7 +16,7 @@ public class CarResource {
     private String model;
     private int mileage;
     private int seating;
-    private boolean manual;
+    private String manual;
     private int carValueInDollars;
     private String extraInformation;
     private int rate;

@@ -43,7 +43,7 @@ public class Car implements Serializable {
     private int seating;
 
     @NotNull
-    private boolean manual;
+    private String manual;
 
 
     private int carValueInDollars;
@@ -70,7 +70,8 @@ public class Car implements Serializable {
     @NotBlank
     private String mechanicConditions;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private User user;
 }
