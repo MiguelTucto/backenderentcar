@@ -1,73 +1,69 @@
 package com.upc.pe.backenderentcar.test.step.rent;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.upc.pe.backenderentcar.rent.resource.CreateRentResource;
-import com.upc.pe.backenderentcar.rent.resource.RentResource;
-import com.upc.pe.backenderentcar.user.resource.UserResource;
+import com.upc.pe.backenderentcar.rent.domain.model.entity.Rent;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.assertj.core.api.AssertionsForClassTypes;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.log4j.Log4j2;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import java.util.Random;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+@Log4j2
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class RentAddingStepDefinition {
-    @Autowired
-    private TestRestTemplate testRestTemplate;
-    @LocalServerPort
-    private int randomServerPort;
-    private String endPointPath;
-    private ResponseEntity<String> responseEntity;
-    @Given("The Endpoint {string} is available for rents")
-    public void theEndpointIsAvailableForRents(String endPointPath) {
-        this.endPointPath = String.format("http://localhost:%d/api/v1/rents", randomServerPort);
+    private RestTemplate restTemplate = new RestTemplate();
+    private String url = "http://localhost:4020/api/v1";
+    private String message = "";
+    Rent rentEntity;
+    Long rentId = randomLong();
+    public Long randomLong() {
+        Long generatedLong = new Random().nextLong();
+        return generatedLong;
     }
 
-    @When("A Rent Request is sent with values {string}, {string}, {int}, {int}")
-    public void aRentRequestIsSentWithValues(String startDate, String finishDate, int amount, int rate) {
-        CreateRentResource resource = new CreateRentResource()
-                .withStartDate(startDate)
-                .withFinishDate(finishDate)
-                .withAmount(amount)
-                .withRate(rate);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<CreateRentResource> request = new HttpEntity<>(resource, headers);
-        responseEntity = testRestTemplate.postForEntity(endPointPath, request, String.class);
+    @Given("I want to add a Rent")
+    public void i_want_to_add_a_rent() {
+        String rentUrl = url + "/rents";
+        String getEndpoint = restTemplate.getForObject(rentUrl, String.class);
+        log.info(getEndpoint);
+        assertTrue(!getEndpoint.isEmpty());
     }
 
-    @Then("A Response with Status {int} is received for the rent")
-    public void aResponseWithStatusIsReceivedForTheRent(int expectedStatusCode) {
-        int actualStatusCode = responseEntity.getStatusCodeValue();
-        assertThat(expectedStatusCode).isEqualTo(actualStatusCode);
+    @Given("I add a Rent with startDate {string}, finishDate {string}, amount {int} and rate {int}")
+    public void i_add_a_rent_with_start_date_finish_date_amount_and_rate(String startDate, String finishDate, int amount, int rate) {
+        // Write code here that turns the phrase above into concrete actions
+        String rentUrl = url + "/rents/user" + 1;
+        Rent rent = new Rent(rentId, startDate, finishDate, amount, rate);
+        log.info(rent.getId());
+        assertNotNull(rent);
+    }
+    @And("I add a Rent with startDate <startDate>, finishDate <finishDate>, amount <amount> and rate <rate>")
+    public void i_add_a_rent_with_startDate_finishDate_amount_and_rate(String startDate, String finishDate, int amount, int rate) {
+        String rentUrl = url + "/rents/user" + 1;
+        Rent newRent = new Rent(rentId, startDate, finishDate, amount, rate);
+        rentEntity = restTemplate.postForObject(rentUrl, newRent, Rent.class);
+        log.info(rentEntity.getId());
+        assertNotNull(rentEntity);
     }
 
-    @And("A Rent Resource with values {string}, {string}, {int}, {int}")
-    public void aRentResourceWithValues(String startDate, String finishDate, int amount, int rate) {
-        RentResource resource = new RentResource()
-                .withFinishDate(finishDate)
-                .withStartDate(startDate)
-                .withAmount(amount)
-                .withRate(rate);
-
-        String value = responseEntity.getBody();
-        ObjectMapper mapper = new ObjectMapper();
-        RentResource actualResource;
+    @Then("I should be able to see my Rent")
+    public void iShouldBeAbleToSeeMyRent() {
+        String rentUrl = url + "/rents/user" + 1;
         try {
-            actualResource = mapper.readValue(value, RentResource.class);
-        } catch (JsonProcessingException | NullPointerException e) {
-            actualResource = new RentResource();
+            Rent getRentById = restTemplate.getForObject(rentUrl, Rent.class,1);
+            log.info(getRentById);
+        } catch (RestClientException e) {
+            message = "";
         }
-        resource.setId(actualResource.getId());
-        AssertionsForClassTypes.assertThat(resource).usingRecursiveComparison().isEqualTo(actualResource);
+        assertEquals("", message);
     }
+
 }

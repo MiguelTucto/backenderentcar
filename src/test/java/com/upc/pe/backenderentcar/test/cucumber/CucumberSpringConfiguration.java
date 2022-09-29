@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 @CucumberContextConfiguration
-@SpringBootTest(classes = BackenderentcarApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = BackenderentcarApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ContextConfiguration(classes = BackenderentcarApplication.class, loader = SpringBootContextLoader.class)
 public class CucumberSpringConfiguration {
 }

@@ -4,7 +4,7 @@ Feature: Car Adding
   So that It can be available to applications
 
     Background:
-      Given The Endpoint "http://localhost:%d/api/v1/cars" is available for cars
+      Given The Endpoint "http://localhost:%d/api/v1/cars/user" is available for cars
 
   @car-adding
   Scenario: Add Car
