@@ -47,6 +47,11 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
+    public Page<Rent> getAllRentsByUserId(Long userId, Pageable pageable) {
+        return rentRepository.getRentByUserId(userId, pageable);
+    }
+
+    @Override
     public Rent getById(Long rentId) {
         return rentRepository.findById(rentId).orElseThrow(() -> new ResourceNotFoundException(ENTITY, rentId));
     }

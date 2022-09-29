@@ -1,6 +1,7 @@
 package com.upc.pe.backenderentcar.rent.domain.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.upc.pe.backenderentcar.car.domain.model.entity.Car;
 import com.upc.pe.backenderentcar.user.domain.model.entity.User;
 import lombok.*;
@@ -39,8 +40,9 @@ public class Rent implements Serializable {
     @NotNull
     private int rate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonIgnore
     private User user;
 
@@ -48,4 +50,12 @@ public class Rent implements Serializable {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     @JsonIgnore
     private Car car;
+
+    public Rent(Long id, String startDate, String finishDate, int amount, int rate) {
+        this.id = id;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
+        this.amount = amount;
+        this.rate = rate;
+    }
 }

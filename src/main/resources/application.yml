@@ -25,7 +25,7 @@ spring:
     hibernate:
       ddl-auto: create
     show_sql: true
-    #database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
     #atabase-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:

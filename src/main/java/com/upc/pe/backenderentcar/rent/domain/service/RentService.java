@@ -10,6 +10,7 @@ import java.util.List;
 public interface RentService {
     List<Rent> getAll();
     Page<Rent> getAll(Pageable pageable);
+    Page<Rent> getAllRentsByUserId(Long userId, Pageable pageable);
     Rent getById(Long rentId);
     Rent create(Long userId, Long carId, Rent request);
     Rent update(Long rentId, Rent request);
