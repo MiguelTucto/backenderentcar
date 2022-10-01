@@ -31,8 +31,8 @@ public class UserAddingStepDefinition {
         this.endPointPath = String.format("http://localhost:%d/api/v1/users", randomServerPort);
     }
 
-    @When("A User Request is sent with values {string}, {string}, {string}, {string}, {string}, {string}, {int}")
-    public void aUserRequestIsSentWithValues(String name, String lastName, String typeOfUser, String email, String password, String imageUrl, int phone) {
+    @When("A User Request is sent with values {string}, {string}, {string}, {string}, {string}, {string}, {string}")
+    public void aUserRequestIsSentWithValues(String name, String lastName, String typeOfUser, String email, String password, String imageUrl, String phone) {
         CreateUserResource resource = new CreateUserResource()
                 .withName(name)
                 .withLastName(lastName)
@@ -53,8 +53,8 @@ public class UserAddingStepDefinition {
         assertThat(expectedStatusCode).isEqualTo(actualStatusCode);
     }
 
-    @And("A User Resource is sent with values {string}, {string}, {string}, {string}, {string}, {string}, {int}")
-    public void aUserResourceIsSentWithValues(String name, String lastName, String typeOfUser, String email, String password, String imageUrl, int phone) {
+    @And("A User Resource is sent with values {string}, {string}, {string}, {string}, {string}, {string}, {string}")
+    public void aUserResourceIsSentWithValues(String name, String lastName, String typeOfUser, String email, String password, String imageUrl, String phone) {
         UserResource resource = new UserResource()
                 .withName(name)
                 .withLastName(lastName)
