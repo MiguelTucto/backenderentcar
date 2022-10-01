@@ -56,5 +56,9 @@ public class User implements Serializable {
     @Column(unique = true)
     private String imageUrl;
 
-    private int phone;
+    @NotNull
+    @NotBlank
+    @Size(max = 50)
+    @Column(unique = true)
+    private String phone;
 }

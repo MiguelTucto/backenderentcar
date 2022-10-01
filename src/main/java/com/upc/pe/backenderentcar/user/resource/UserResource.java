@@ -15,5 +15,5 @@ public class UserResource {
     private String imageUrl;
     private String email;
     private String password;
-    private int phone;
+    private String phone;
 }
