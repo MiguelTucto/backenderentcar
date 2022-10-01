@@ -2,34 +2,31 @@ pipeline {
     agent any
     tools {
         maven 'MAVEN_3_6_3'
-        jdk 'JDK_1_8'
+        jdk 'JDK_1_11'
     }
-
     stages {
-        stage ('Compile Stage eRentCar') {
+        stage ('Compile Stage 2022-01') {
 
             steps {
                 withMaven(maven : 'MAVEN_3_6_3') {
-                    sh 'mvn clean compile'
+                    bat 'mvn clean compile'
                 }
             }
         }
-
-        stage ('Testing Stage eRentCar') {
+        stage ('Testing Stage 2022-01') {
 
             steps {
                 withMaven(maven : 'MAVEN_3_6_3') {
-                    sh 'mvn test'
+                    bat 'mvn test'
                 }
             }
         }
-
         stage ('package Stage') {
             steps {
                 withMaven(maven : 'MAVEN_3_6_3') {
-                    sh 'mvn package'
+                    bat 'mvn package'
                 }
             }
         }
-
+    }
 }
