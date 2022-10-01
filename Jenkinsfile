@@ -5,7 +5,7 @@ pipeline {
         jdk 'JDK_1_11'
     }
     stages {
-        stage ('Compile Stage 2022-01') {
+        stage ('Compile Stage') {
 
             steps {
                 withMaven(maven : 'MAVEN_3_6_3') {
@@ -13,7 +13,7 @@ pipeline {
                 }
             }
         }
-        stage ('Testing Stage 2022-01') {
+        stage ('Testing Stage') {
 
             steps {
                 withMaven(maven : 'MAVEN_3_6_3') {
