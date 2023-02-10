@@ -15,7 +15,7 @@ spring:
     #username: sa
   #password: admin
     driver-class-name: org.postgresql.Driver
-    url: postgresql://${ postgres }:${ ZPgV9P9KuN0w3bxL4Gkk }@${ containers-us-west-186.railway.app }:${ 6803 }/${ railway }
+    url: postgresql://postgres:ZPgV9P9KuN0w3bxL4Gkk@containers-us-west-186.railway.app:6803/railway
     dbCreate: update
     username: postgres
     password: ZPgV9P9KuN0w3bxL4Gkk
