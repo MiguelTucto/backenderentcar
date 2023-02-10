@@ -15,10 +15,7 @@ spring:
     #username: sa
   #password: admin
     driver-class-name: org.postgresql.Driver
-    url: postgres://twawllwlszdtpx:e4bce8bee34eeab2d4255825264dbecbfd54277a3b40a58375a62c29522dcc2a@ec2-44-209-24-62.compute-1.amazonaws.com:5432/ddev8llqvj6lrb
     dbCreate: update
-    username: twawllwlszdtpx
-    password: e4bce8bee34eeab2d4255825264dbecbfd54277a3b40a58375a62c29522dcc2a
   jpa:
     #database: h2
     database: postgresql
