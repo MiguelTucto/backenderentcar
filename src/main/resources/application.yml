@@ -17,7 +17,8 @@ spring:
     dbCreate: update
     username: postgres
     password: ZPgV9P9KuN0w3bxL4Gkk
-    url: jdbc:postgresql://postgres:ZPgV9P9KuN0w3bxL4Gkk@containers-us-west-186.railway.app:6803/railway
+    url: postgres://ZPgV9P9KuN0w3bxL4Gkk@containers-us-west-186.railway.app:6803/railway
+
   jpa:
     #database: h2
     database: postgresql
