@@ -16,7 +16,8 @@ spring:
     dbCreate: update
     username: erentcar_user
     password: K9ypc9rgndTOjmAh7qzZPuUifWCQuk71
-    url: jdbc:postgresql://dpg-cfjdj4la49903fjar8i0-a:5432/erentcar?user=erentcar_user&password=K9ypc9rgndTOjmAh7qzZPuUifWCQuk71
+    url: postgresql://postgres:ZPgV9P9KuN0w3bxL4Gkk@containers-us-west-186.railway.app:6803/railway
+    #jdbc:postgresql://dpg-cfjdj4la49903fjar8i0-a:5432/erentcar?user=erentcar_user&password=K9ypc9rgndTOjmAh7qzZPuUifWCQuk71
     #jdbc:postgresql://erentcar_user:K9ypc9rgndTOjmAh7qzZPuUifWCQuk71@dpg-cfjdj4la49903fjar8i0-a.oregon-postgres.render.com/erentcar
 
   jpa:
