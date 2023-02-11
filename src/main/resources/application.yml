@@ -13,7 +13,7 @@ spring:
     #url: jdbc:h2:file:~/data/selenium;
     #username: sa
   #password: admin
-    url: jdbc:postgresql://postgres:ZPgV9P9KuN0w3bxL4Gkk@containers-us-west-186.railway.app:6803/railway
+    url: postgres://erentcar_user:K9ypc9rgndTOjmAh7qzZPuUifWCQuk71@dpg-cfjdj4la49903fjar8i0-a.oregon-postgres.render.com/erentcar
     dbCreate: update
     username: postgres
     password: ZPgV9P9KuN0w3bxL4Gkk
